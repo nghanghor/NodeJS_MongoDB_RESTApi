@@ -4,46 +4,41 @@ const Schema = mongoose.Schema;
 
 
 const UserSchema = new Schema({
-    email:{                   //StudentID(email ID)
+    _id:{                   //StudentID(email ID)
         type:String,
-        required:true
-    },
-    name:{
-        type:String,
-        required:true
+        //required:true
     },
     password:{
         type:String,
-        required:true
+        //required:true
     },
     phoneNo :{
         type:Number,
-        required:true
+        //required:true
     },
     Subscribe:{
         type:Boolean,
         //required:true,
-        default:function(){
-            if(this.email!=null){
-                return true;
-            }
-            return false;
-        }
+        default:true
     },
      SkillSet:[String],
     WorkExperience:[{
-        startString:String,
-        endString:String,
+        startDate:Date,
+        endDate:Date,
         companyName:String,
         postName:String
     }],
     Education:[
         {
-           BoardOfExamination:String,
-           MarksObtained:Number,
-           PassingYear:String
+            education:{
+                    marks: Number,
+                    BoardOfExamination: Number
+            },
+            startDate:Date,
+            endDate:Date,
+            MarksSecured:Number
         }
     ]
-});
+},{_id:false});
 
 module.exports = mongoose.model('User',UserSchema);

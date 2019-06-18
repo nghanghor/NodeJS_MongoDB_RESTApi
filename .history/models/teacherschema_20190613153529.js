@@ -11,10 +11,6 @@ const TeacherSchema = new Schema({
         type:String,
         required:true
     },
-    password:{
-        type:String,
-        required:true
-    },
     phoneNo:{
         type:Number,
         required:true
@@ -24,17 +20,23 @@ const TeacherSchema = new Schema({
         required:true
     },
     WorkExperience:[{
-            startDate:{type:Date,required:true},
-            endDate:{type:String,required:true},
-            companyName:{type:String,required:true},
-            postName:{type:String,required:true}
-            
+            startDate:Date,
+            endDate:Date,
+            companyName:String,
+            postName:String
         }],
-    Education:[{
-            BoardOfExamination:{type:String,required:true},
-            MarksObtained:{type:String,required:true},
-            PassingYear:{type:String,required:true}
-    }]
+    Education:{
+        type:[{
+        education:{
+            marks: Number,
+            BoardOfExamination: Number
+        },
+        startDate:Date,
+        endDate:Date,
+        MarksSecured:Number,
+        }],
+        required:true
+    }
 });
 
 module.exports = mongoose.model('Teacher',TeacherSchema);

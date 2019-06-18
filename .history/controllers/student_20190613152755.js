@@ -97,7 +97,7 @@ exports.Login = (req,res,next) => {
                     throw error = new Error('Passwords don\'t match');
                 }
                 console.log("User Logged in");
-                res.json('/home');
+                res.render('/home');
             })
             .catch(error => {
                 console.log(error);

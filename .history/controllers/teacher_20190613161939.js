@@ -2,7 +2,7 @@ const {validationResult} = require('express-validator/check');
 const bcrypt = require('bcrypt');
 
 //Here User points to the collection students
-const User = require('../models/Studentschema');
+const User = require('../models/teacherschema');
 
 exports.Signup = (req,res,next) => {
      const errors = validationResult(req);
@@ -27,7 +27,7 @@ exports.Signup = (req,res,next) => {
     var Education = req.body.Education;
     let flg = false;
     
-    if(email && name && password && phoneNo){
+    if(email && name && password && phoneNo && Workexp && Education){
         User.findOne({email:email})
         .then(result =>{                //result will be null if no match exists of the email
             console.log("33 "+result);
@@ -97,7 +97,7 @@ exports.Login = (req,res,next) => {
                     throw error = new Error('Passwords don\'t match');
                 }
                 console.log("User Logged in");
-                res.json('/home');
+                res.render('/home');
             })
             .catch(error => {
                 console.log(error);

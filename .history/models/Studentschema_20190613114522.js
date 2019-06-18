@@ -9,8 +9,7 @@ const UserSchema = new Schema({
         required:true
     },
     name:{
-        type:String,
-        required:true
+        type:String
     },
     password:{
         type:String,
@@ -23,12 +22,7 @@ const UserSchema = new Schema({
     Subscribe:{
         type:Boolean,
         //required:true,
-        default:function(){
-            if(this.email!=null){
-                return true;
-            }
-            return false;
-        }
+        default:true
     },
      SkillSet:[String],
     WorkExperience:[{

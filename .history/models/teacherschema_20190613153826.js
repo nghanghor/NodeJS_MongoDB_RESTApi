@@ -11,10 +11,6 @@ const TeacherSchema = new Schema({
         type:String,
         required:true
     },
-    password:{
-        type:String,
-        required:true
-    },
     phoneNo:{
         type:Number,
         required:true
@@ -24,16 +20,17 @@ const TeacherSchema = new Schema({
         required:true
     },
     WorkExperience:[{
-            startDate:{type:Date,required:true},
-            endDate:{type:String,required:true},
-            companyName:{type:String,required:true},
-            postName:{type:String,required:true}
-            
+            startDate:String,
+            endDate:String,
+            companyName:String,
+            postName:String,
+            required:true
         }],
     Education:[{
-            BoardOfExamination:{type:String,required:true},
-            MarksObtained:{type:String,required:true},
-            PassingYear:{type:String,required:true}
+            BoardOfExamination:String,
+            MarksObtained:Number,
+            PassingYear:String,
+            required:true
     }]
 });
 

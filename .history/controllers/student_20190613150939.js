@@ -84,20 +84,20 @@ exports.Login = (req,res,next) => {
     const email = req.body.email;
     const password = req.body.password;
     User.findOne({email:email})
-            .then(user => {                 //user will be undefined if no match is found
+            .then(user => {
                 if(!user){
                     console.log("A user with the given email can't be found");
                     throw error = new Error('Email cannot be found');
                 }
                 return bcrypt.compare(password,user.password);
             })
-            .then(result => {               //result will be undefined if password's doesn't match
+            .then(result => {
                 if(!result){
                     console.log("Password doesn't match");
                     throw error = new Error('Passwords don\'t match');
                 }
                 console.log("User Logged in");
-                res.json('/home');
+                res.render('/home');
             })
             .catch(error => {
                 console.log(error);

@@ -29,8 +29,7 @@ exports.Signup = (req,res,next) => {
     
     if(email && name && password && phoneNo){
         User.findOne({email:email})
-        .then(result =>{                //result will be null if no match exists of the email
-            console.log("33 "+result);
+        .then(result =>{
                 if(!result){
                     bcrypt.hash(password,12).
                     then(hashedPw => {
@@ -46,30 +45,27 @@ exports.Signup = (req,res,next) => {
                         user.save();
                         }
                     )
+                    .then(res =>{
+                        flg = true;
+                    })
                 }
                 else{
-                    console.log("55 "+flg);
                     if(!flg)
                     console.log("User already signed up");
                 }
         }).
-        then(result => {        //result will be undefined if email doesn't match
-          //  console.log("57 "+result);
-            if(!result){
+        then(result => {
+            if(!result)
+                if(flg)
                 console.log("User Signed Up Successfully");
-          //  console.log("60 "+flg);
-            return flg = true;
-            }
         })
-        .then( result =>{       //result will be undefined
-            console.log("64 "+result);
+        .then( result =>{
             if(flg)
             res.json('login');
     //        res.render('/login');
             else
             res.json('signedup');
     //      res.render('/signup');
-            console.log("71 "+flg);
         })
         .catch(err => {
             console.log(err);
@@ -84,20 +80,20 @@ exports.Login = (req,res,next) => {
     const email = req.body.email;
     const password = req.body.password;
     User.findOne({email:email})
-            .then(user => {                 //user will be undefined if no match is found
+            .then(user => {
                 if(!user){
                     console.log("A user with the given email can't be found");
                     throw error = new Error('Email cannot be found');
                 }
                 return bcrypt.compare(password,user.password);
             })
-            .then(result => {               //result will be undefined if password's doesn't match
+            .then(result => {
                 if(!result){
                     console.log("Password doesn't match");
                     throw error = new Error('Passwords don\'t match');
                 }
                 console.log("User Logged in");
-                res.json('/home');
+                res.render('/home');
             })
             .catch(error => {
                 console.log(error);

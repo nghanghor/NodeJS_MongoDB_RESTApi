@@ -23,12 +23,7 @@ const UserSchema = new Schema({
     Subscribe:{
         type:Boolean,
         //required:true,
-        default:function(){
-            if(this.email!=null){
-                return true;
-            }
-            return false;
-        }
+        default:true
     },
      SkillSet:[String],
     WorkExperience:[{

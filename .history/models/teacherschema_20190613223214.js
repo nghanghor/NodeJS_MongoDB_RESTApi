@@ -11,10 +11,6 @@ const TeacherSchema = new Schema({
         type:String,
         required:true
     },
-    password:{
-        type:String,
-        required:true
-    },
     phoneNo:{
         type:Number,
         required:true
@@ -24,7 +20,7 @@ const TeacherSchema = new Schema({
         required:true
     },
     WorkExperience:[{
-            startDate:{type:Date,required:true},
+            startDate:{type:String,required:true},
             endDate:{type:String,required:true},
             companyName:{type:String,required:true},
             postName:{type:String,required:true}

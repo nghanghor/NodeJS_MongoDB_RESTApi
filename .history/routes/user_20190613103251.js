@@ -17,17 +17,16 @@ router.get('/student/login');
 router.post('/student/login',AuthenticiateStudent.Login);
 
 //get /student/signup
-router.get('/student/signup');
+router.get('student/signup');
 
 //post /student/signup
-router.post('/student/signup',
-[
-    body('email')
+router.post('/student/signup',[
+    body('_id')
       .isEmail()
       .withMessage('Please enter a valid email.')
       .custom((value, { req }) => {
-        return student.findOne({ email: value }).then(Doc => {
-          if (Doc) {
+        return student.findOne({ _id: value }).then(teacherDoc => {
+          if (teacherDoc) {
             return Promise.reject('E-Mail address already exists!');
           }
         });
